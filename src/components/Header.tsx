@@ -8,7 +8,7 @@ const Header: React.FC = () => {
   return (
     <header className='flex items-center gap-8'>
       {!isLandingPage && (
-        <Link to='/'>
+        <Link to='/exercises'>
           <Logo />
         </Link>
       )}
