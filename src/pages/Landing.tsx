@@ -1,11 +1,7 @@
-import ThemeButton from '../components/ThemeButton';
+import Page from '../components/Page';
 
 const Landing: React.FC = () => {
-  return (
-    <div className='text-xl '>
-      <ThemeButton />
-    </div>
-  );
+  return <Page>landing</Page>;
 };
 
 export default Landing;

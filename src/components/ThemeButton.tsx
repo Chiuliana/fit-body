@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';
 
-const ThemeButton: React.FC = () => {
+export interface ThemeButtonProps {
+  className?: string;
+}
+
+const ThemeButton: React.FC<ThemeButtonProps> = ({ className }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const localTheme = localStorage.getItem('theme');
     if (localTheme) {
@@ -21,7 +25,10 @@ const ThemeButton: React.FC = () => {
   };
 
   return (
-    <button className='cursor-pointer' onClick={onClick}>
+    <button
+      className={`cursor-pointer p-3 rounded-xl border border-black/15 dark:border-white/15 ${className}`}
+      onClick={onClick}
+    >
       {theme === 'dark' ? <FiSun /> : <FiMoon />}
     </button>
   );
