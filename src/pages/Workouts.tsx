@@ -76,7 +76,7 @@ const Workouts: React.FC = () => {
         <div className='h-full p-6 rounded-lg shadow-[0px_0px_25px_-5px_rgba(0,0,0,0.1)] dark:bg-neutral-700'>
           <div className='flex items-center gap-4'>
             <FaPersonRunning className='w-8 h-8 text-violet-500 dark:text-lime-400' />
-            <h1 className='text-[32px]'>Exercise Library</h1>
+            <h1 className='text-[32px]'>Workout Library</h1>
             <button
               className={`cursor-pointer flex items-center justify-center gap-3 px-6 py-3 ml-auto font-medium rounded-full transition-colors duration-300 ${
                 form
@@ -92,7 +92,7 @@ const Workouts: React.FC = () => {
               ) : (
                 <>
                   <FiPlus className='w-5 h-5' />
-                  <span>Add Exercise</span>
+                  <span>Add Workout</span>
                 </>
               )}
             </button>
