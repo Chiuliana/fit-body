@@ -37,7 +37,7 @@ const ExerciseCard: React.FC<Exercise> = ({
           <AiOutlineDelete />
         </button>
       </div>
-      <p className='text-sm text-black/70 dark:text-white/70 line-clamp-3 font-light'>
+      <p className='text-sm text-black/70 dark:text-white/70 line-clamp-3'>
         {description}
       </p>
     </div>
