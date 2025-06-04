@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import LevelSelect from '../components/LevelSelect';
 import Page from '../components/Page';
 import Search from '../components/Search';
@@ -7,7 +7,8 @@ import type { Exercise } from '../types/exercises';
 import NavBar from '../components/NavBar';
 import ExerciseCard from '../components/ExerciseCard';
 import { LuDumbbell } from 'react-icons/lu';
-import { MdAdd } from 'react-icons/md';
+import ExerciseForm from '../components/ExerciseFrom';
+import { FiPlus } from 'react-icons/fi';
 
 const Exercises: React.FC = () => {
   const [list, setList] = useState<Exercise[]>([]);
@@ -15,14 +16,21 @@ const Exercises: React.FC = () => {
     search: '',
     level: '',
   });
+  const [form, setForm] = useState<boolean>(false);
 
-  useEffect(() => {
+  const getList = () => {
     const list = exercises.getAll(
       params.search,
       params.level ? parseInt(params.level) : undefined,
     );
     setList(list);
-  }, [params]);
+  };
+
+  const getListClb = useCallback(getList, [params]);
+
+  useEffect(() => {
+    getListClb();
+  }, [params, getListClb]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const search = e.target.value;
@@ -33,6 +41,21 @@ const Exercises: React.FC = () => {
 
   const handleLevelChange = (level: string) => {
     setParams((prev) => ({ ...prev, level }));
+  };
+
+  const handleFormButtonClick = () => {
+    setForm((prev) => !prev);
+  };
+
+  const handleDelete = (id: number) => {
+    exercises.delete(id);
+    getList();
+  };
+
+  const handleFormSubmit = (data: Exercise) => {
+    exercises.add(data);
+    setForm(false);
+    getList();
   };
 
   return (
@@ -51,14 +74,34 @@ const Exercises: React.FC = () => {
           <div className='flex items-center gap-4'>
             <LuDumbbell className='w-8 h-8 text-violet-500 dark:text-lime-400' />
             <h1 className='text-[32px]'>Exercise Library</h1>
-            <button className='cursor-pointer flex items-center justify-center gap-3 px-6 py-3 ml-auto font-medium rounded-full bg-violet-500 text-white hover:bg-violet-400 dark:bg-lime-400 dark:hover:bg-lime-300 dark:text-black transition-colors duration-300'>
-              <MdAdd className='w-5 h-5' />
-              <span>Add Exercise</span>
+            <button
+              className={`cursor-pointer flex items-center justify-center gap-3 px-6 py-3 ml-auto font-medium rounded-full transition-colors duration-300 ${
+                form
+                  ? 'bg-red-500 text-white hover:bg-red-400 '
+                  : 'bg-violet-500 text-white hover:bg-violet-400 dark:bg-lime-400 dark:hover:bg-lime-300 dark:text-black'
+              }`}
+              onClick={handleFormButtonClick}
+            >
+              {form ? (
+                <>
+                  <span>Cancel</span>
+                </>
+              ) : (
+                <>
+                  <FiPlus className='w-5 h-5' />
+                  <span>Add Exercise</span>
+                </>
+              )}
             </button>
           </div>
+          {form && <ExerciseForm onSubmit={handleFormSubmit} />}
           <div className='grid grid-cols-2 gap-3 mt-6'>
             {list.map((exercise) => (
-              <ExerciseCard {...exercise} />
+              <ExerciseCard
+                {...exercise}
+                onDelete={handleDelete}
+                key={exercise.id}
+              />
             ))}
           </div>
         </div>

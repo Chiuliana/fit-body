@@ -3,11 +3,10 @@ import type { Exercise } from '../types/exercises';
 
 const exercises = {
   getAll: (search?: string, level?: number) => {
-    const exercisesList = exercisesData;
-    const storedExercises = localStorage.getItem('exercises');
-    if (storedExercises) {
-      exercisesList.push(...JSON.parse(storedExercises));
-    }
+    const storedExercises = JSON.parse(
+      localStorage.getItem('exercises') || '[]',
+    );
+    const exercisesList = [...exercisesData, ...storedExercises];
 
     if (search) {
       return exercisesList.filter(
@@ -39,7 +38,7 @@ const exercises = {
     const storedExercises = JSON.parse(
       localStorage.getItem('exercises') || '[]',
     );
-    const newId = Math.random().toString().substring(2, 9); // Generate a random ID
+    const newId = Math.floor(Math.random() * 100000000);
     const exerciseWithId = { ...exercise, id: newId };
     localStorage.setItem(
       'exercises',

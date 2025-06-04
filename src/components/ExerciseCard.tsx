@@ -4,12 +4,18 @@ import Tag from './Tag';
 import { levelColorMap, levelMap } from '../utils/maps';
 import { AiOutlineDelete } from 'react-icons/ai';
 
-const ExerciseCard: React.FC<Exercise> = ({
+export interface ExerciseCardProps extends Exercise {
+  onDelete: (id: number) => void;
+}
+
+const ExerciseCard: React.FC<ExerciseCardProps> = ({
+  id,
   name,
   description,
   muscle_group,
   level,
   is_default,
+  onDelete,
 }) => {
   return (
     <div className='flex flex-col gap-3 px-6 py-5 rounded-xl shadow-[0px_0px_25px_-5px_rgba(0,0,0,0.1)] dark:bg-neutral-800'>
@@ -33,9 +39,14 @@ const ExerciseCard: React.FC<Exercise> = ({
             </Tag>
           )}
         </div>
-        <button className='cursor-pointer ml-auto p-1 rounded-md text-red-500 bg-red-500/5 hover:bg-red-500/10 transition-colors duration-300'>
-          <AiOutlineDelete />
-        </button>
+        {!is_default && (
+          <button
+            className='cursor-pointer ml-auto p-1 rounded-md text-red-500 bg-red-500/5 hover:bg-red-500/10 transition-colors duration-300'
+            onClick={() => id && onDelete(id)}
+          >
+            <AiOutlineDelete />
+          </button>
+        )}
       </div>
       <p className='text-sm text-black/70 dark:text-white/70 line-clamp-3'>
         {description}
