@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Squats",
+        "description": "A lower body exercise that targets the quadriceps, hamstrings, and glutes.",
+        "muscle_group": "Legs",
+        "level": 1,
+        "is_default": true
+    },
+    {
+        "id": 2,
+        "name": "Lunges",
+        "description": "Start in a plank with a straight body, lower your chest by bending your elbows, then push back up to plank.",
+        "muscle_group": "Legs",
+        "level": 1,
+        "is_default": true
+    },
+    {
+        "id": 3,
+        "name": "Planks",
+        "description": "Hold body in straight line from head to heels, supporting weight on forearms and toes.",
+        "muscle_group": "Core",
+        "level": 2,
+        "is_default": true
+    },
+    {
+        "id": 4,
+        "name": "Pull-ups",
+        "description": "Hang from bar with arms extended, pull body up until chin clears bar, lower with control.",
+        "muscle_group": "Back and Biceps",
+        "level": 3,
+        "is_default": true
+    },
+    {
+        "id": 5,
+        "name": "Burpees",
+        "description": "Squat down, jump back to plank, do push-up, jump feet to hands, jump up with arms overhead.",
+        "muscle_group": "Full Body",
+        "level": 3,
+        "is_default": true
+    }
+]
