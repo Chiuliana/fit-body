@@ -14,13 +14,13 @@ const Search: React.FC<SearchProps> = ({
 }) => {
   return (
     <div
-      className={`flex items-center gap-3 p-3 bg-neutral-700 text-white/50 rounded-lg shadow-black/10 shadow-lg ${className}`}
+      className={`flex items-center gap-3 p-3 dark:bg-neutral-700 dark:text-white/50 rounded-xl shadow-[0px_0px_25px_-5px_rgba(0,0,0,0.1)] ${className}`}
       style={style}
     >
       <FiSearch />
       <input
         {...rest}
-        className={`text-white placeholder:text-white/50 w-full focus:outline-0 ${inputClassName}`}
+        className={`dark:text-white text-black placeholder:text-black/50 dark:placeholder:text-white/50 w-full focus:outline-0 ${inputClassName}`}
         style={inputStyle}
       />
     </div>

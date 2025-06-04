@@ -4,6 +4,7 @@ export type Exercise = {
   description: string;
   muscle_group: string;
   level: number;
+  is_default?: boolean;
 };
 
 export type WorkoutExercise = {

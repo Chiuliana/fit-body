@@ -1,8 +1,8 @@
 import workoutsData from '../data/workouts.json';
-import type { Workout } from '../types/exercises';
+import type { Workout, WorkoutExercise } from '../types/exercises';
 
 const workouts = {
-  getAll: (search: string, level: number) => {
+  getAll: (search?: string, level?: number) => {
     const workoutsList = workoutsData;
     const storedWorkouts = localStorage.getItem('workouts');
     if (storedWorkouts) {
@@ -37,12 +37,26 @@ const workouts = {
   },
   add: (workout: Workout) => {
     const storedWorkouts = JSON.parse(localStorage.getItem('workouts') || '[]');
-    const newId = Math.random().toString(36).substring(2, 9); // Generate a random ID
-    const workoutWithId = { ...workout, id: newId };
+    const newId = Math.random().toString().substring(2, 9); // Generate a random ID
+    const workoutWithId = { ...workout, exercises: [], id: newId };
     localStorage.setItem(
       'workouts',
       JSON.stringify([...storedWorkouts, workoutWithId]),
     );
+  },
+  addExercises: (id: number, exercises: WorkoutExercise[]) => {
+    const storedWorkouts = localStorage.getItem('workouts');
+    if (storedWorkouts) {
+      const workoutsList = JSON.parse(storedWorkouts);
+      const workoutIndex = workoutsList.findIndex(
+        (workout: { id: number }) => workout.id === id,
+      );
+
+      if (workoutIndex !== -1) {
+        workoutsList[workoutIndex].exercises.push(...exercises);
+        localStorage.setItem('workouts', JSON.stringify(workoutsList));
+      }
+    }
   },
 };
 

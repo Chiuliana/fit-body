@@ -1,6 +1,7 @@
 import type { RouteObject } from 'react-router';
 import Landing from '../pages/Landing';
 import Exercises from '../pages/Exercises';
+import Workouts from '../pages/Workouts';
 
 const routes: RouteObject[] = [
   {
@@ -8,8 +9,12 @@ const routes: RouteObject[] = [
     element: <Landing />,
   },
   {
-    path: '/:exercises',
+    path: '/exercises',
     element: <Exercises />,
+  },
+  {
+    path: '/workouts',
+    element: <Workouts />,
   },
 ];
 

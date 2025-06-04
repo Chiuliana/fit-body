@@ -39,7 +39,7 @@ const exercises = {
     const storedExercises = JSON.parse(
       localStorage.getItem('exercises') || '[]',
     );
-    const newId = Math.random().toString(36).substring(2, 9); // Generate a random ID
+    const newId = Math.random().toString().substring(2, 9); // Generate a random ID
     const exerciseWithId = { ...exercise, id: newId };
     localStorage.setItem(
       'exercises',
